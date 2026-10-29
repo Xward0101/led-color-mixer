@@ -12,6 +12,7 @@ red_text = tk.StringVar()
 green_text = tk.StringVar()
 blue_text = tk.StringVar()
 hex_text = tk.StringVar()
+
 #Red
 ttk.Label(frame, text="Red (0-255):").grid(column=0, row=0, sticky=tk.E) 
 ttk.Entry(frame, width=10, textvariable=red_text).grid(column=1, row=0, sticky=tk.W)
@@ -21,6 +22,11 @@ ttk.Entry(frame, width=10, textvariable=green_text).grid(column=1, row=1, sticky
 #Blue
 ttk.Label(frame, text="Blue (0-255):").grid(column=0, row=2, sticky=tk.E) 
 ttk.Entry(frame, width=10, textvariable=blue_text).grid(column=1, row=2, sticky=tk.W)
+#HexCode
+ttk.Label(frame, text="Hex code:").grid(column=0, row=4, sticky=tk.E)
+ttk.Entry(frame, width=10, textvariable=hex_text, state="readonly").grid(column=1, row=4, sticky=tk.W)
+
+
 
 
 root.mainloop()
