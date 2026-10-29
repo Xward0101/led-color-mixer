@@ -1,6 +1,16 @@
 import tkinter as tk
 from tkinter import ttk, messagebox 
 
+def to_hex(red, green, blue):
+    #Turn three numbers from 0 to 255 into a hex color code.
+    return f"#{red:02X}{green:02X}{blue:02X}"
+def mix():
+    red = int(red_text.get())
+    green = int(green_text.get())
+    blue = int(blue_text.get())
+    code = to_hex(red, green, blue)
+    swatch.config(bg=code)
+    hex_text.set(code)
 
 root = tk.Tk()
 root.title("LED Color Mixer")
@@ -13,6 +23,7 @@ green_text = tk.StringVar()
 blue_text = tk.StringVar()
 hex_text = tk.StringVar()
 
+#Layout
 #Red
 ttk.Label(frame, text="Red (0-255):").grid(column=0, row=0, sticky=tk.E) 
 ttk.Entry(frame, width=10, textvariable=red_text).grid(column=1, row=0, sticky=tk.W)
@@ -28,6 +39,9 @@ ttk.Entry(frame, width=10, textvariable=hex_text, state="readonly").grid(column=
 #ColorSwatch
 swatch = tk.Label(frame, width=20, height=6, bg="#333333", relief="sunken")
 swatch.grid(column=2, row=0, rowspan=5)
+#MixColorButton
+ttk.Button(frame, text="Mix Color", command=mix).grid(column=0, row=3, columnspan=2)
+
 
 
 root.mainloop()
