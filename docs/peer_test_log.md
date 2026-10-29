@@ -8,7 +8,7 @@ where they got stuck and what changed afterward.
 - **Date:**
 - **Tester (first name or initials):**
 - **Computer and Python version:** (for example, Windows 11, Python 3.12)
-- **Time to finish TODO 1-5:**
+- **Time to finish TODOs 1-3:**
 
 | Step | Finished without help? | Where they got stuck | What I changed |
 |---|---|---|---|
@@ -16,8 +16,8 @@ where they got stuck and what changed afterward.
 | TODO 1: mainloop | | | |
 | TODO 2: Green and Blue rows | | | |
 | TODO 3: Mix Color | | | |
-| TODO 4: error boxes | | | |
-| TODO 5: own scene | | | |
+| TODO 4 (bonus): error boxes | | | |
+| TODO 5 (bonus): own scene | | | |
 
 **Check-your-understanding answers they got right (1-4):**
 
@@ -30,7 +30,7 @@ where they got stuck and what changed afterward.
 | Starter exits with no window before TODO 1 | Pass |
 | Each step's result matches its README screenshot | Pass |
 | `0, 200, 255` mixes to `#00C8FF` | Pass |
-| Warm White `#FFA957`, Movie Night `#3C288C`, Sunset `#FF5E4D` | Pass |
+| Warm White `#FFA957`, Movie Night `#3C288C` | Pass |
 | After TODO 3: `abc` prints a `ValueError` in the terminal, window stays open | Pass |
-| After TODO 4: `300`, `-1`, `abc`, `12.5`, and an empty box each show an error box and leave the color unchanged | Pass |
-| After TODO 4: `255, 0, 0` mixes to `#FF0000` with no error | Pass |
+| Bonus TODO 4 code from the README: `300`, `-1`, `abc`, `12.5`, and an empty box each show an error box and leave the color unchanged | Pass |
+| Bonus TODO 4 code from the README: `255, 0, 0` mixes to `#FF0000` with no error | Pass |

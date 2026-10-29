@@ -8,7 +8,8 @@ Run this file from the led-color-mixer folder:
     Windows:  python code/led_mixer_starter.py
     Mac:      python3 code/led_mixer_starter.py
 
-Complete the TODOs in order (1 through 5) and run the file after each one.
+Complete TODOs 1 to 3 in order and run the file after each one.
+TODOs 4 and 5 are bonus challenges for after class or if you finish early.
 Stuck? Compare with code/led_mixer_finished.py after you have tried the step.
 """
 
@@ -39,12 +40,12 @@ def get_channel(text, name):
     try:
         value = int(text)
     except ValueError:
-        # TODO 4a: Show an error box, for example:
+        # TODO 4a (bonus): Show an error box, for example:
         #   messagebox.showerror("Invalid value", f"{name} must be a whole number.")
         return None
 
     if value < 0 or value > 255:
-        # TODO 4b: Show an error box that says the value must be 0 to 255.
+        # TODO 4b (bonus): Show an error box that says the value must be 0 to 255.
         return None
 
     return value
@@ -82,7 +83,7 @@ def movie_night():
     load_scene(60, 40, 140)
 
 
-# TODO 5a: Add your own scene function here. Copy the pattern above:
+# TODO 5a (bonus): Add your own scene function here. Copy the pattern above:
 #   def your_scene_name():
 #       load_scene(R, G, B)
 
@@ -136,7 +137,7 @@ ttk.Button(scene_frame, text="Warm White", command=warm_white).grid(
 ttk.Button(scene_frame, text="Movie Night", command=movie_night).grid(
     column=1, row=0)
 
-# TODO 5b: Add a button for your scene in column 2 of scene_frame.
+# TODO 5b (bonus): Add a button for your scene in column 2 of scene_frame.
 
 # Add the same padding around every component in the frame (figure 18-5)
 for child in frame.winfo_children():

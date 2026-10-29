@@ -15,18 +15,17 @@ this page is the run-of-show.
 | Time | What happens | Say or ask |
 |---|---|---|
 | 0:00-2:00 | **Hook and topic.** Show the finished app. Click Warm White, then Movie Night. | "Every smart-light app stores color as three numbers. Today you'll build the part you touch." Name the chapter: Ch. 18, pp. 511-533. |
-| 2:00-3:00 | **Clone and setup check.** Everyone runs `git clone`, opens the folder, then `python -m tkinter` (Mac: `python3`). | "If a little window popped up, you're ready." |
-| 3:00-4:30 | **TODO 1.** Everyone runs the starter. Nothing happens. | Ask: "Why did it just quit?" Then key idea 1: a GUI waits. Add `mainloop()`. |
-| 4:30-6:30 | **TODO 2.** Add Green and Blue rows. | Point out column and row. "Grid is a spreadsheet for widgets." |
-| 6:30-9:30 | **TODO 3.** Write `mix()`, connect `command=mix`. | Key idea 2: callbacks. Key idea 3: `.get()` reads, `.set()` writes. Then: "Type abc. What broke?" |
-| 9:30-11:30 | **TODO 4.** Error boxes. | "Users will type anything. Never trust a box." |
-| 11:30-14:00 | **TODO 5.** Everyone adds their own scene. | Walk the room. Look for `command=my_scene()`; if you see it, show it on screen as the common mistake. |
-| 14:00-15:00 | **Debrief and hand-off.** Ask a reflection question from the README. | "Right now this is one long script. Page 522 shows how to organize it as a class," then hand off to the professor. |
+| 2:00-4:00 | **Clone and setup check.** Everyone runs `git clone`, opens the folder, then `python -m tkinter` (Mac: `python3`). | "If a little window popped up, you're ready." |
+| 4:00-6:00 | **TODO 1.** Everyone runs the starter. Nothing happens. | Ask: "Why did it just quit?" Then key idea 1: a GUI waits. Add `mainloop()`. |
+| 6:00-8:30 | **TODO 2.** Add Green and Blue rows. | Point out column and row. "Grid is a spreadsheet for widgets." |
+| 8:30-12:30 | **TODO 3.** Write `mix()`, connect `command=mix`. Click Movie Night too. | Key idea 2: callbacks. Key idea 3: `.get()` reads, `.set()` writes. Point out `command=mix` has no parentheses. |
+| 12:30-13:30 | **Break it.** Everyone types `abc` and clicks Mix Color. | "What broke? Users will type anything. That's what the bonus TODO 4 fixes." |
+| 13:30-15:00 | **Debrief and hand-off.** Ask a reflection question from the README and point to the bonus TODOs. | "Right now this is one long script. Page 522 shows how to organize it as a class," then hand off to the professor. |
 
 ## If time runs short
 
-- Skip the "try to break it" moment in TODO 3 and go straight to TODO 4.
-- Do TODO 5 together on screen instead of individually.
+- Do TODO 2 together on screen instead of individually.
+- Shorten the "break it" moment to a live demo on your screen.
 - Anyone behind can compare with `code/led_mixer_finished.py`, or put the finished code on
   screen so they can copy the step the room is on.
 

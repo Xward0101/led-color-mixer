@@ -4,7 +4,7 @@ Build a small desktop app that mixes red, green, and blue light into a color, sh
 and saves "scenes" you can load with one click. Along the way you will learn how a Python GUI
 waits for you, listens for clicks, and talks to the boxes on screen.
 
-![The finished LED Color Mixer](docs/images/finished_app.png)
+![The LED Color Mixer after TODO 3](docs/images/step3_mix.png)
 
 ## At a glance
 
@@ -12,8 +12,8 @@ waits for you, listens for clicks, and talks to the boxes on screen.
 |---|---|
 | **Schedule topic** | Week 9: Murach's Python Programming, Section 4, Part B. GUI programming |
 | **Textbook** | *Murach's Python Programming*, 2nd ed., Chapter 18, "How to build a GUI program," pages 511-533 |
-| **Time** | About 15 minutes |
-| **You will practice** | Root windows and the event loop, labels and entry boxes, `StringVar`, grid layout, button callbacks, read-only fields, and message boxes |
+| **Time** | About 15 minutes for TODOs 1 to 3, plus optional bonus challenges |
+| **You will practice** | Root windows and the event loop, labels and entry boxes, `StringVar`, grid layout, button callbacks, and read-only fields. Bonus: message boxes |
 | **Python** | 3.10 or newer. No packages to install (`tkinter` comes with Python) |
 
 ## Why this is worth learning
@@ -79,13 +79,15 @@ box. Scene buttons use `.set()` to fill the boxes for you. (Figure 18-4, pages 5
 |---|---|
 | `python code/led_mixer_starter.py` | `python3 code/led_mixer_starter.py` |
 
-**Stuck?** The finished app is in `code/led_mixer_finished.py`. Try each step yourself first,
-then use it to compare.
+**Stuck?** A finished version of TODOs 1 to 3 is in `code/led_mixer_finished.py`. Try each step
+yourself first, then use it to compare. It focuses on the core mixer, so it leaves out the scene
+buttons and padding that come pre-built in your starter.
 
 ## The activity
 
-Work through the TODOs in order. Each one ends with a **Checkpoint** that tells you what you
-should see.
+**TODOs 1 to 3 are the activity.** TODOs 4 and 5 are bonus challenges for anyone who finishes
+early or wants to keep going after class. Each TODO ends with a **Checkpoint** that tells you what
+you should see.
 
 ### TODO 1: Make the window appear (pages 512-513)
 
@@ -158,9 +160,14 @@ Two things are new here:
 
 **Now try to break it.** Type `abc` in the Red box and click Mix Color. A red error appears in
 the terminal (`ValueError`), and the color does not change. Users will type anything, so we need
-to catch that.
+to catch that. That is where the bonus challenges pick up.
 
-### TODO 4: Catch bad input with message boxes (pages 524-529)
+## Bonus challenges (on your own)
+
+Finished early, or want to keep going after class? These two TODOs are already marked in your
+starter file.
+
+### TODO 4 (bonus): Catch bad input with message boxes (pages 524-529)
 
 Find `get_channel()`. It already tries to convert the text with `int()`, just like the book's
 `get_int()` method on page 529. Fill in the two error boxes:
@@ -190,7 +197,7 @@ if red is None or green is None or blue is None:
 
 ![Checkpoint 4: the error box](docs/images/error_box.png)
 
-### TODO 5: Add your own scene (your turn)
+### TODO 5 (bonus): Add your own scene
 
 This step has no copy-and-paste answer. Look at how `warm_white()` and its button work, then add
 a scene of your own: your room's lighting, a favorite team's color, anything.
@@ -205,7 +212,19 @@ Party `(255, 0, 180)`.
 
 > **Checkpoint 5:** Your button appears next to Movie Night. Clicking it fills the three boxes
 > and the swatch changes to your color.
-> Example answer: `code/led_mixer_finished.py` (adds a Sunset scene)
+
+<details>
+<summary>Example answer (try it yourself first)</summary>
+
+```python
+def sunset():
+    load_scene(255, 94, 77)
+```
+
+```python
+ttk.Button(scene_frame, text="Sunset", command=sunset).grid(column=2, row=0)
+```
+</details>
 
 ## Common mistake: parentheses after a callback
 
@@ -247,7 +266,7 @@ ran the function once at startup.
 </details>
 
 <details>
-<summary>4. Why does <code>mix()</code> <code>return</code> early when a value is <code>None</code>?</summary>
+<summary>4. (Bonus) Why does <code>mix()</code> <code>return</code> early when a value is <code>None</code>?</summary>
 
 `None` means that box failed validation and the user already saw an error box. Returning stops
 `to_hex()` from crashing and leaves the old color on screen.
@@ -289,7 +308,7 @@ led-color-mixer/
 |-- .gitignore
 |-- code/
 |   |-- led_mixer_starter.py        the file you edit
-|   `-- led_mixer_finished.py       the completed app, for comparing
+|   `-- led_mixer_finished.py       finished TODOs 1 to 3, for comparing
 `-- docs/
     |-- facilitator_notes.md        presenter run-of-show
     |-- peer_test_log.md            results from peer testing
@@ -300,6 +319,9 @@ led-color-mixer/
 
 - The app shows colors on screen only. It does not connect to real lights. Controlling an actual
   LED strip would need hardware and a library for Bluetooth or a serial connection.
+- The finished file covers TODOs 1 to 3 and leaves out the pre-built scene buttons and padding,
+  so it looks a little different from your starter. The bonus TODOs have no answer file; this README shows
+  the code for TODO 4 and an example answer for TODO 5.
 - Scenes live in the code, so a new scene means a new function and button. Saving scenes to a file
   would be a natural next step.
 - Screenshots were taken on Linux. Buttons and boxes look a little different on Windows and Mac,
@@ -314,8 +336,8 @@ led-color-mixer/
   Activity 4 (Party Roster) materials.
 - **Color values:** the scene colors are approximations chosen for this activity, not
   manufacturer specifications.
-- **AI assistance:** I used Claude (Anthropic) to brainstorm activity ideas, draft the starter and
-  finished code, and draft this README. I verified the code against Chapter 18 and by running
-  the starter and finished app at every step, including the invalid inputs listed in TODO 4, and confirmed each scene
-  produces the hex code shown. Peer testing results and the changes I made afterward are in
+- **AI assistance:** I used Claude (Anthropic) to brainstorm activity ideas, draft the starter
+  file and this README, and coach me with hints while I wrote `led_mixer_finished.py` myself.
+  I verified the code against Chapter 18 and by running it after every step, and checked that
+  each checkpoint produces the result and hex code shown. Peer testing results and the changes I made afterward are in
   [docs/peer_test_log.md](docs/peer_test_log.md).
