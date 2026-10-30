@@ -30,7 +30,9 @@ where they got stuck and what changed afterward.
 | Starter exits with no window before TODO 1 | Pass |
 | Each step's result matches its README screenshot | Pass |
 | `0, 200, 255` mixes to `#00C8FF` | Pass |
-| Warm White `#FFA957`, Movie Night `#3C288C` | Pass |
+| Completed starter matches `code/led_mixer_finished.py` line for line | Pass |
+| `command=mix()` crashes on launch with `ValueError` about `''` | Pass |
+| Bonus TODO 5 example: Movie Night preset gives `#3C288C` | Pass |
 | After TODO 3: `abc` prints a `ValueError` in the terminal, window stays open | Pass |
 | Bonus TODO 4 code from the README: `300`, `-1`, `abc`, `12.5`, and an empty box each show an error box and leave the color unchanged | Pass |
 | Bonus TODO 4 code from the README: `255, 0, 0` mixes to `#FF0000` with no error | Pass |

@@ -1,8 +1,8 @@
 # LED Color Mixer
 
-Build a small desktop app that mixes red, green, and blue light into a color, shows its hex code,
-and saves "scenes" you can load with one click. Along the way you will learn how a Python GUI
-waits for you, listens for clicks, and talks to the boxes on screen.
+Build a small desktop app that mixes red, green, and blue light into a color and shows its hex
+code. Along the way you will learn how a Python GUI waits for you, listens for clicks, and talks
+to the boxes on screen.
 
 ![The LED Color Mixer after TODO 3](docs/images/step3_mix.png)
 
@@ -44,8 +44,8 @@ it which function to run *later*, when someone clicks it. That function is calle
 or **event handler**. (Figure 18-3, pages 516-517.)
 
 **3. `StringVar` is the bridge between a box and your code.** Each entry box is bound to a
-`StringVar`. Your code uses `.get()` to read what the user typed and `.set()` to write into the
-box. Scene buttons use `.set()` to fill the boxes for you. (Figure 18-4, pages 518-519.)
+`StringVar`. Your code uses `.get()` to read what the user typed and `.set()` to write into a
+box. `mix()` reads the three color boxes and writes the result into the Hex code box. (Figure 18-4, pages 518-519.)
 
 ## Before you start
 
@@ -64,7 +64,7 @@ box. Scene buttons use `.set()` to fill the boxes for you. (Figure 18-4, pages 5
 1. **Clone the repository.** Open a terminal in the folder where you keep class work, then run:
 
    ```text
-   git clone https://github.com/YOUR-USERNAME/led-color-mixer.git
+   git clone https://github.com/Xward0101/led-color-mixer.git
    ```
 
    This creates a `led-color-mixer` folder with everything inside. No Git? On the repository page,
@@ -79,9 +79,8 @@ box. Scene buttons use `.set()` to fill the boxes for you. (Figure 18-4, pages 5
 |---|---|
 | `python code/led_mixer_starter.py` | `python3 code/led_mixer_starter.py` |
 
-**Stuck?** A finished version of TODOs 1 to 3 is in `code/led_mixer_finished.py`. Try each step
-yourself first, then use it to compare. It focuses on the core mixer, so it leaves out the scene
-buttons and padding that come pre-built in your starter.
+**Stuck?** The finished app is in `code/led_mixer_finished.py`. It is the starter with TODOs 1 to
+3 filled in, line for line. Try each step yourself first, then use it to compare.
 
 ## The activity
 
@@ -103,8 +102,8 @@ Scroll to the bottom of the file and add this as the **very last line**:
 root.mainloop()
 ```
 
-> **Checkpoint 1:** A window titled "LED Color Mixer" appears with a Red box, a Mix Color button,
-> a Hex code box, a dark swatch, and two scene buttons. Nothing works yet.
+> **Checkpoint 1:** A window titled "LED Color Mixer" appears with a Red box, a dark swatch, and a
+> Hex code box under the swatch. Nothing works yet.
 
 ![Checkpoint 1](docs/images/step1_window.png)
 
@@ -114,47 +113,54 @@ Find the Red row. It is a `Label` in column 0 and an `Entry` in column 1, both i
 
 ```python
 ttk.Label(frame, text="Red (0-255):").grid(column=0, row=0, sticky=tk.E)
-ttk.Entry(frame, width=10, textvariable=red_text).grid(
-    column=1, row=0, sticky=tk.W)
+ttk.Entry(frame, width=10, textvariable=red_text).grid(column=1, row=0, sticky=tk.W)
 ```
 
 Copy it twice, right below, for **Green in row 1** and **Blue in row 2**. Change three things each
 time: the label text, the `StringVar` (`green_text`, `blue_text`), and the row number.
 
-> **Checkpoint 2:** Three labeled boxes, lined up in a neat column.
+> **Checkpoint 2:** Three labeled boxes, lined up in a column beside the swatch.
 
 ![Checkpoint 2](docs/images/step2_layout.png)
 
 ### TODO 3: Make Mix Color work (pages 516-519)
 
-Find the `mix()` function near the top and replace `pass` with:
+This TODO has two parts: the function that does the work, and the button that runs it.
+
+**TODO 3a: write `mix()`.** Find `mix()` near the top and replace `pass` with code that does four
+things:
+
+1. Read each box with `.get()` and turn the text into a number with `int()`
+2. Build the hex code with `to_hex()`
+3. Color the swatch
+4. Write the hex code into the Hex code box
 
 ```python
 red = int(red_text.get())
 green = int(green_text.get())
 blue = int(blue_text.get())
-
 code = to_hex(red, green, blue)
 swatch.config(bg=code)
 hex_text.set(code)
 ```
 
-Then find the Mix Color button and connect it to your callback:
+**TODO 3b: add the button.** Find TODO 3b and add a Mix Color button that runs `mix` when clicked:
 
 ```python
 ttk.Button(frame, text="Mix Color", command=mix).grid(column=0, row=3, columnspan=2)
 ```
 
-Two things are new here:
+Three things are new here:
 
+- `command=mix` connects the button to your callback. **No parentheses** (see
+  [Common mistake](#common-mistake-parentheses-after-a-callback)).
 - `swatch.config(bg=code)` changes a widget **after** it was created. The book does not cover
   `config()`, but it works on almost every widget.
 - The swatch is a `tk.Label`, not a `ttk.Label`. On Mac, `ttk` widgets ignore background colors,
   so the plain `tk` version is used for anything that needs to change color.
 
 > **Checkpoint 3:** Type `0`, `200`, `255` and click Mix Color. The swatch turns sky blue and the
-> Hex code box shows `#00C8FF`. Click **Movie Night**: the boxes fill in by themselves and the
-> swatch turns deep purple (`#3C288C`).
+> Hex code box shows `#00C8FF`. Try a few colors of your own.
 
 ![Checkpoint 3](docs/images/step3_mix.png)
 
@@ -164,32 +170,24 @@ to catch that. That is where the bonus challenges pick up.
 
 ## Bonus challenges (on your own)
 
-Finished early, or want to keep going after class? These two TODOs are already marked in your
-starter file.
+Finished early, or want to keep going after class? These have no starter code. Write them in your
+own copy of the file.
 
 ### TODO 4 (bonus): Catch bad input with message boxes (pages 524-529)
 
-Find `get_channel()`. It already tries to convert the text with `int()`, just like the book's
-`get_int()` method on page 529. Fill in the two error boxes:
+Write a function named `get_channel(text, name)` above `mix()` that:
 
-```python
-messagebox.showerror("Invalid value", f"{name} must be a whole number.")
-```
+1. **Tries** to turn `text` into an `int`
+2. If that raises a `ValueError`, shows an error box and returns `None`
+3. If the number is below 0 or above 255, shows an error box and returns `None`
+4. Otherwise returns the number
 
-```python
-messagebox.showerror("Out of range", f"{name} must be from 0 to 255.")
-```
+Then change `mix()` to call `get_channel()` instead of `int()`, and stop early with `return` if
+any value came back as `None`.
 
-Then, in `mix()`, swap each `int(...)` for `get_channel(...)` and stop early if any value failed:
-
-```python
-red = get_channel(red_text.get(), "Red")
-green = get_channel(green_text.get(), "Green")
-blue = get_channel(blue_text.get(), "Blue")
-
-if red is None or green is None or blue is None:
-    return
-```
+**Hints:** the book's `get_int()` method on page 529 uses the same try/except pattern. The error
+box is `messagebox.showerror(title, message)` on page 525. An f-string lets the message name the
+box: `f"{name} must be a whole number."`
 
 > **Checkpoint 4:** Type `300` in Red and click Mix Color. A pop-up says
 > "Red must be from 0 to 255." Click OK. The color has not changed, and your typing is still
@@ -197,45 +195,77 @@ if red is None or green is None or blue is None:
 
 ![Checkpoint 4: the error box](docs/images/error_box.png)
 
-### TODO 5 (bonus): Add your own scene
+<details>
+<summary>Example answer (try it yourself first)</summary>
 
-This step has no copy-and-paste answer. Look at how `warm_white()` and its button work, then add
-a scene of your own: your room's lighting, a favorite team's color, anything.
+```python
+def get_channel(text, name):
+    try:
+        value = int(text)
+    except ValueError:
+        messagebox.showerror("Invalid value", f"{name} must be a whole number.")
+        return None
+    if value < 0 or value > 255:
+        messagebox.showerror("Out of range", f"{name} must be from 0 to 255.")
+        return None
+    return value
+```
+
+The first three lines of `mix()` become:
+
+```python
+red = get_channel(red_text.get(), "Red")
+green = get_channel(green_text.get(), "Green")
+blue = get_channel(blue_text.get(), "Blue")
+if red is None or green is None or blue is None:
+    return
+```
+</details>
+
+### TODO 5 (bonus): Add a preset color button
+
+Smart-light apps let you save a favorite color and load it with one tap. Add one preset of your
+own: your room's lighting, a favorite team's color, anything.
 
 You need two things:
 
-1. **A function** near the other scenes (TODO 5a) that calls `load_scene()` with your three numbers.
-2. **A button** in `scene_frame`, column 2 (TODO 5b), whose `command=` names your function.
+1. **A function** that fills the three boxes with `.set()` and then calls `mix()`
+2. **A button** whose `command=` names your function. Row 4, columns 0 and 1, is open, right below
+   Mix Color
 
-Need ideas? Focus `(255, 249, 253)`, Sunset `(255, 94, 77)`, Ocean `(0, 180, 200)`,
-Party `(255, 0, 180)`.
+Need ideas? Warm White `(255, 169, 87)`, Movie Night `(60, 40, 140)`, Sunset `(255, 94, 77)`,
+Ocean `(0, 180, 200)`.
 
-> **Checkpoint 5:** Your button appears next to Movie Night. Clicking it fills the three boxes
-> and the swatch changes to your color.
+> **Checkpoint 5:** Your button appears under Mix Color. Clicking it fills the three boxes by
+> itself and the swatch changes to your color. Movie Night gives `#3C288C`.
 
 <details>
 <summary>Example answer (try it yourself first)</summary>
 
 ```python
-def sunset():
-    load_scene(255, 94, 77)
+def movie_night():
+    red_text.set("60")
+    green_text.set("40")
+    blue_text.set("140")
+    mix()
 ```
 
 ```python
-ttk.Button(scene_frame, text="Sunset", command=sunset).grid(column=2, row=0)
+ttk.Button(frame, text="Movie Night", command=movie_night).grid(column=0, row=4, columnspan=2)
 ```
 </details>
 
 ## Common mistake: parentheses after a callback
 
 ```python
-ttk.Button(scene_frame, text="Sunset", command=sunset())   # wrong
-ttk.Button(scene_frame, text="Sunset", command=sunset)     # right
+ttk.Button(frame, text="Mix Color", command=mix())   # wrong
+ttk.Button(frame, text="Mix Color", command=mix)     # right
 ```
 
-With parentheses, Python **runs** `sunset()` immediately, once, while it builds the window, and
-hands the button its result (`None`). Your scene loads on startup and the button does nothing
-when clicked. Without parentheses, you hand the button the **function itself** to run later.
+With parentheses, Python **runs** `mix()` immediately, once, while it builds the window. The boxes
+are still empty, so `int("")` crashes and the app never opens. The terminal shows
+`ValueError: invalid literal for int() with base 10: ''`. Without parentheses, you hand the button
+the **function itself** to run later, when it is clicked.
 
 A related mistake from TODO 1: any code placed **after** `root.mainloop()` will not run until the
 window closes. Keep `mainloop()` as the last line.
@@ -254,15 +284,15 @@ Adding `mainloop()` as the last line shows the window and keeps it open, waiting
 <details>
 <summary>2. What is the difference between <code>red_text.get()</code> and <code>red_text.set("255")</code>?</summary>
 
-`.get()` reads whatever is in the Red box. `.set("255")` writes `255` into the box. Mix Color
-reads; the scene buttons write.
+`.get()` reads whatever is in the Red box. `.set("255")` writes `255` into the box. `mix()` does
+both: it reads the three color boxes and writes into the Hex code box.
 </details>
 
 <details>
-<summary>3. Your new scene loads the moment the app opens, and clicking its button does nothing. What happened?</summary>
+<summary>3. You added the Mix Color button and now the app crashes before the window opens, with a <code>ValueError</code> about <code>''</code>. What happened?</summary>
 
-The button was created with `command=my_scene()` instead of `command=my_scene`. The parentheses
-ran the function once at startup.
+The button was created with `command=mix()` instead of `command=mix`. The parentheses ran `mix()`
+while the window was being built, when the boxes were still empty, and `int("")` crashed.
 </details>
 
 <details>
@@ -319,11 +349,12 @@ led-color-mixer/
 
 - The app shows colors on screen only. It does not connect to real lights. Controlling an actual
   LED strip would need hardware and a library for Bluetooth or a serial connection.
-- The finished file covers TODOs 1 to 3 and leaves out the pre-built scene buttons and padding,
-  so it looks a little different from your starter. The bonus TODOs have no answer file; this README shows
-  the code for TODO 4 and an example answer for TODO 5.
-- Scenes live in the code, so a new scene means a new function and button. Saving scenes to a file
-  would be a natural next step.
+- The finished file covers TODOs 1 to 3. The bonus TODOs have no answer file; this README shows
+  an example answer for each.
+- There is no padding between widgets, so labels sit right against their boxes. The padding loop on
+  page 521 of the book would add space.
+- Presets live in the code, so a new preset means a new function and button. Saving presets to a
+  file would be a natural next step.
 - Screenshots were taken on Linux. Buttons and boxes look a little different on Windows and Mac,
   but the layout and behavior are the same.
 
@@ -334,7 +365,7 @@ led-color-mixer/
   pattern follow figures 18-1 through 18-8.
 - **Course materials:** activity structure and README style were informed by the course's
   Activity 4 (Party Roster) materials.
-- **Color values:** the scene colors are approximations chosen for this activity, not
+- **Color values:** the preset colors are approximations chosen for this activity, not
   manufacturer specifications.
 - **AI assistance:** I used Claude (Anthropic) to brainstorm activity ideas, draft the starter
   file and this README, and coach me with hints while I wrote `led_mixer_finished.py` myself.
